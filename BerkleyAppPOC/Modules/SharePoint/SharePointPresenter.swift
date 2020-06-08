@@ -73,7 +73,7 @@ class SharePointPresenter {
                     
                 }
                 // find max element in every column
-                let fields = self.items.map({ $0.fields }) ?? [Dictionary<String, Any>]()
+                let fields = self.items.map({ $0.fields })
                 if !self.columns.isEmpty,
                     !fields.isEmpty {
                     for index in 0..<self.columns.count {
