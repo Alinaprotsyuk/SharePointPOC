@@ -11,17 +11,29 @@ import UIKit
 open class PlaceholderTextView: UITextView {
     @objc required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshPlaceholder),
+                                               name: UITextView.textDidChangeNotification,
+                                               object: self
+        )
     }
     
     @objc override public init(frame: CGRect, textContainer: NSTextContainer?) {
         super.init(frame: frame, textContainer: textContainer)
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshPlaceholder),
+                                               name: UITextView.textDidChangeNotification,
+                                               object: self
+        )
     }
     
     @objc override open func awakeFromNib() {
         super.awakeFromNib()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.refreshPlaceholder), name: UITextView.textDidChangeNotification, object: self)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.refreshPlaceholder),
+                                               name: UITextView.textDidChangeNotification,
+                                               object: self
+        )
         
         self.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.5).cgColor
         self.layer.borderWidth = 1.0
@@ -93,9 +105,17 @@ open class PlaceholderTextView: UITextView {
             let offsetTop = textContainerInset.top
             let offsetBottom = textContainerInset.top
             
-            let expectedSize = unwrappedPlaceholderLabel.sizeThatFits(CGSize(width: self.frame.width-offsetLeft-offsetRight, height: self.frame.height-offsetTop-offsetBottom))
+            let expectedSize = unwrappedPlaceholderLabel.sizeThatFits(
+                CGSize(width: self.frame.width - offsetLeft - offsetRight,
+                       height: self.frame.height - offsetTop - offsetBottom
+                )
+            )
             
-            unwrappedPlaceholderLabel.frame = CGRect(x: offsetLeft, y: offsetTop, width: expectedSize.width, height: expectedSize.height)
+            unwrappedPlaceholderLabel.frame = CGRect(x: offsetLeft,
+                                                     y: offsetTop,
+                                                     width: expectedSize.width,
+                                                     height: expectedSize.height
+            )
         }
     }
     

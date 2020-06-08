@@ -1,9 +1,9 @@
 //
 //  HTTPMethod.swift
-//  NetworkLayer
+//  BerkleyAppPOC
 //
-//  Created by Marcin Jackowski on 06/09/2018.
-//  Copyright © 2018 CocoApps. All rights reserved.
+//  Created by Alina Protsiuk on 5/28/19.
+//  Copyright © 2019 CoreValue. All rights reserved.
 //
 
 enum HTTPMethod: String {

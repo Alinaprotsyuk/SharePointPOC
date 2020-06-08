@@ -56,21 +56,5 @@ class SharePointInteractor {
             }
         }
     }
-    
-//    func editItem(id: String, parameters: [String: String], complition: @escaping (Fields?, String?) -> Void) {
-//        networkManager.editItem(id: id, parameters: parameters, completion: { [weak self] (result, error) in
-//            self?.mainQueue.async {
-//                complition(result, error)
-//            }
-//        })
-//    }
-//    
-//    func createItem(parameters: [String: Any], complition: @escaping (ValueItem?, String?) -> Void) {
-//        networkManager.createItem(parameters: parameters, completion: { [weak self] (result, error) in
-//            self?.mainQueue.async {
-//                complition(result, error)
-//            }
-//        })
-//    }
 }
 

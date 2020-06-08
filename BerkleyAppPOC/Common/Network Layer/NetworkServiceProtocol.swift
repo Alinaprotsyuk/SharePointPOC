@@ -13,5 +13,4 @@ protocol NetworkServiceProtocol: AnyObject {
     func createItem(retry: Bool, parameters: [String: Any], completion: @escaping (Item?, String?) -> Void)
     func editItem(retry: Bool, id: String, parameters: [String: Any], completion: @escaping ([String: Any]?, String?) -> Void)
     func getInitialInfo(retry: Bool, completion: @escaping (DataSitesId?, [String : String]?, String?) -> Void)
-    //func signOut()
 }

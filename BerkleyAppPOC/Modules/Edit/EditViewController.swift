@@ -88,7 +88,8 @@ extension EditViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if presenter.columns[indexPath.row].displayName?.lowercased() == "attachments" {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier) as? ButtonTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: ButtonTableViewCell.identifier)
+                as? ButtonTableViewCell else {
                 return UITableViewCell()
             }
             cell.delegate = self
@@ -97,7 +98,8 @@ extension EditViewController: UITableViewDataSource {
             let allowMultipleLines = textType.allowMultipleLines,
             allowMultipleLines {
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier) as? TextViewTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TextViewTableViewCell.identifier)
+                as? TextViewTableViewCell else {
                 return UITableViewCell()
             }
             cell.textView.placeholder = presenter.columns[indexPath.row].displayName?.capitalized
@@ -114,7 +116,8 @@ extension EditViewController: UITableViewDataSource {
             
             
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier) as? TextFieldTableViewCell else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.identifier)
+                as? TextFieldTableViewCell else {
                 return UITableViewCell()
             }
             cell.delegate = self

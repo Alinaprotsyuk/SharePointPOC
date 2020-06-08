@@ -25,6 +25,8 @@ class SharePointPresenter {
     var editedSelectedSection: Int?
     var selectedSections = [Int]()
     
+    let kDefaultSpace: CGFloat = 30.0
+    
     init(interactor: SharePointInteractor) {
         self.interactor = interactor
     }
@@ -49,18 +51,18 @@ class SharePointPresenter {
     
     func getAllItems() {
         view?.showActivity()
-        interactor.getAllItems { [weak self] (result, data, error) in
-            self?.view?.hideActivity()
+        interactor.getAllItems { [unowned self] (result, data, error) in
+            self.view?.hideActivity()
             if let error = error {
-                self?.view?.showError(error)
+                self.view?.showError(error)
             } else {
                 if let account = data {
-                    self?.createAccountView(account)
+                    self.createAccountView(account)
                 }
                 
-                self?.items = result?.items ?? [Item]()
+                self.items = result?.items ?? [Item]()
                 if let columns = result?.columns {
-                    self?.columns = columns.filter({ (column) -> Bool in
+                    self.columns = columns.filter({ (column) -> Bool in
                         guard let readOnly = column.readOnly else { return false }
                         if column.name != "ContentType" && column.name != "Attachments" {
                             return !readOnly
@@ -71,24 +73,24 @@ class SharePointPresenter {
                     
                 }
                 // find max element in every column
-                let fields = self?.items.map({ $0.fields }) ?? [Dictionary<String, Any>]()
-                if !self!.columns.isEmpty,
+                let fields = self.items.map({ $0.fields }) ?? [Dictionary<String, Any>]()
+                if !self.columns.isEmpty,
                     !fields.isEmpty {
-                    for index in 0..<self!.columns.count {
+                    for index in 0..<self.columns.count {
                         var stringArray = fields.map({ (dict) -> String in
-                            guard let text = dict[self!.columns[index].name ?? ""] as? String else { return "" }
+                            guard let text = dict[self.columns[index].name ?? ""] as? String else { return "" }
                             return text
                         })
                         
-                        stringArray.insert(self!.columns[index].displayName ?? "", at: 0)
+                        stringArray.insert(self.columns[index].displayName ?? "", at: 0)
                         
                         if let maxText = stringArray.max(by: { $0.count < $1.count}) {
-                            self!.columns[index].width = maxText.widthOfString(usingFont: UIFont.systemFont(ofSize: 12.0)) + 30
+                            self.columns[index].width = maxText.widthOfString(usingFont: UIFont.systemFont(ofSize: 12.0)) + self.kDefaultSpace
                         }
                     }
                 }
                 
-                self?.view?.success()
+                self.view?.success()
             }
         }
     }

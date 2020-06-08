@@ -64,7 +64,10 @@ class AuthHelper {
          flow completes, or encounters an error.
          */
         
-        applicationContext.acquireToken(withResource: infoPlist.getScope(), clientId: infoPlist.getClientID(), redirectUri: infoPlist.getRedirectURI()){ (result) in
+        applicationContext.acquireToken(withResource: infoPlist.getScope(),
+                                        clientId: infoPlist.getClientID(),
+                                        redirectUri: infoPlist.getRedirectURI()
+        ){ (result) in
             DispatchQueue.main.async {
                 self.applicationContext.webView.removeFromSuperview()
             }
@@ -100,7 +103,10 @@ class AuthHelper {
          flow completes, or encounters an error.
          
          */
-        applicationContext.acquireTokenSilent(withResource: infoPlist.getScope(), clientId: infoPlist.getClientID(), redirectUri: infoPlist.getRedirectURI()) { (result) in
+        applicationContext.acquireTokenSilent(withResource: infoPlist.getScope(),
+                                              clientId: infoPlist.getClientID(),
+                                              redirectUri: infoPlist.getRedirectURI()
+        ) { (result) in
             guard let result = result else {
                 completion(false, "Could not acquire token: No result returned")
                 return

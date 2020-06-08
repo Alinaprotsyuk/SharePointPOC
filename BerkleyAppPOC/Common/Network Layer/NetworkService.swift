@@ -36,7 +36,11 @@ extension NetworkService: NetworkServiceProtocol {
         
         let currentAccount = authHelper.currentAccount()
         
-        let request = networkManager.setupReguest(httpMethod: point.httpMethod, url: urlComponents.url!, accessToken: currentAccount?.accessToken ?? "", parameters: nil)
+        let request = networkManager.setupReguest(httpMethod: point.httpMethod,
+                                                  url: urlComponents.url!,
+                                                  accessToken: currentAccount?.accessToken ?? "",
+                                                  parameters: nil
+        )
         networkManager.createDataTask(for: request) { [weak self] (response) in
             switch response {
             case .success(let data):
@@ -66,13 +70,21 @@ extension NetworkService: NetworkServiceProtocol {
                 let urlComponents = URLComponents(service: point, siteId: self?.siteId ?? "", listId: "")
                 let currentAccount = self?.authHelper.currentAccount()
                 
-                let request = self!.networkManager.setupReguest(httpMethod: point.httpMethod, url: urlComponents.url!, accessToken: currentAccount?.accessToken ?? "", parameters: nil)
+                let request = self!.networkManager.setupReguest(httpMethod: point.httpMethod,
+                                                                url: urlComponents.url!,
+                                                                accessToken: currentAccount?.accessToken ?? "",
+                                                                parameters: nil
+                )
                 self!.networkManager.createDataTask(for: request) { [weak self] (response) in
                     switch response {
                     case .success(let data):
                         do {
                             let result = try self?.jsonDecoder.decode(DataSitesId.self, from: data)
-                            completion(result, [AccountCredential.name.rawValue: currentAccount?.userInformation?.givenName ?? "", AccountCredential.surname.rawValue : currentAccount?.userInformation?.familyName ?? ""], nil)
+                            completion(result,
+                                       [AccountCredential.name.rawValue: currentAccount?.userInformation?.givenName ?? "",
+                                        AccountCredential.surname.rawValue : currentAccount?.userInformation?.familyName ?? ""],
+                                       nil
+                            )
                         } catch {
                             completion(nil, nil, error.localizedDescription)
                         }
@@ -89,14 +101,22 @@ extension NetworkService: NetworkServiceProtocol {
         let urlComponents = URLComponents(service: point, siteId: siteId, listId: infoPlist.getListId() ?? "")
         
         let currentAccount = authHelper.currentAccount()
-
-        let request = networkManager.setupReguest(httpMethod: point.httpMethod, url: urlComponents.url!, accessToken: currentAccount?.accessToken ?? "", parameters: nil)
+        
+        let request = networkManager.setupReguest(httpMethod: point.httpMethod,
+                                                  url: urlComponents.url!,
+                                                  accessToken: currentAccount?.accessToken ?? "",
+                                                  parameters: nil
+        )
         networkManager.createDataTask(for: request) { [weak self] (response) in
             switch response {
             case .success(let data):
                 do {
                     let result = try self?.jsonDecoder.decode(GeneralList.self, from: data)
-                    completion(result, [AccountCredential.name.rawValue: currentAccount?.userInformation?.givenName ?? "", AccountCredential.surname.rawValue : currentAccount?.userInformation?.familyName ?? ""], nil)
+                    completion(result,
+                               [AccountCredential.name.rawValue: currentAccount?.userInformation?.givenName ?? "",
+                                AccountCredential.surname.rawValue : currentAccount?.userInformation?.familyName ?? ""],
+                               nil
+                    )
                 } catch {
                     completion(nil, nil, error.localizedDescription)
                 }
@@ -113,7 +133,11 @@ extension NetworkService: NetworkServiceProtocol {
         
         let currentAccount = authHelper.currentAccount()
         
-        let request = networkManager.setupReguest(httpMethod: point.httpMethod, url: urlComponents.url!, accessToken: currentAccount?.accessToken ?? "",  parameters: parameters)
+        let request = networkManager.setupReguest(httpMethod: point.httpMethod,
+                                                  url: urlComponents.url!,
+                                                  accessToken: currentAccount?.accessToken ?? "",
+                                                  parameters: parameters
+        )
         networkManager.createDataTask(for: request) { [weak self] (response) in
             switch response {
             case .success(let data):
@@ -129,13 +153,19 @@ extension NetworkService: NetworkServiceProtocol {
         }
     }
     
-    func editItem(retry: Bool = true, id: String, parameters: [String: Any], completion: @escaping ([String: Any]?, String?) -> Void ) {
+    func editItem(retry: Bool = true, id: String,
+                  parameters: [String: Any],
+                  completion: @escaping ([String: Any]?, String?) -> Void ) {
         let point = SharePointApi.editItem(id: id)
         let urlComponents = URLComponents(service: point, siteId: siteId, listId: infoPlist.getListId() ?? "")
         
         let currentAccount = authHelper.currentAccount()
         
-        let request = networkManager.setupReguest(httpMethod: point.httpMethod, url: urlComponents.url!, accessToken: currentAccount?.accessToken ?? "",  parameters: parameters)
+        let request = networkManager.setupReguest(httpMethod: point.httpMethod,
+                                                  url: urlComponents.url!,
+                                                  accessToken: currentAccount?.accessToken ?? "",
+                                                  parameters: parameters
+        )
         networkManager.createDataTask(for: request) { (response) in
             switch response {
             case .success(let data):

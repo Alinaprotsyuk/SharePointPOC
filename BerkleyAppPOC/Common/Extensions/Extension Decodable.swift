@@ -104,7 +104,9 @@ public extension KeyedEncodingContainerProtocol where Key == JSONCodingKeys {
             case Optional<Any>.none:
                 try encodeNil(forKey: key)
             default:
-                throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: codingPath + [key], debugDescription: "Invalid JSON value"))
+                throw EncodingError.invalidValue(value, EncodingError.Context(codingPath: codingPath + [key],
+                                                                              debugDescription: "Invalid JSON value")
+                )
             }
         })
     }

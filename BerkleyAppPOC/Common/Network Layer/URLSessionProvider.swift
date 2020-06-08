@@ -58,7 +58,8 @@ class URLSessionProvider {
                     self?.authHelper.acquireTokenSilently() { [weak self] (success, error) -> Void in
                         if success {
                             var request = request
-                            request.setValue("Bearer \(self?.authHelper.currentAccount()?.accessToken ?? "")", forHTTPHeaderField: "Authorization")
+                            request.setValue("Bearer \(self?.authHelper.currentAccount()?.accessToken ?? "")",
+                                forHTTPHeaderField: "Authorization")
                             self?.createDataTask(for: request, retry: false, complition: { (response) in
                                 complition(response)
                             })

@@ -19,16 +19,11 @@ class SharePointViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //createAccountView(name: "A", surname: "B")
         setupSearchBar()
         
         collectionView.refreshControl = refreshControl
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
 
-        //collectionView.dragInteractionEnabled = true
-//        ADKeychainTokenCache.defaultKeychain().removeAll(forClientId: "1ab3e10a-b879-42eb-9f16-ce2c48f9f931", error: nil)
-//        ADKeychainTokenCache.defaultKeychain().removeAll(forClientId: "b1e2aa87-9270-4a2b-80f3-50a1a09b47a6", error: nil)
-        
         presenter = SharePointPresenter(interactor: SharePointInteractor(networkManager: networkService))
         
         presenter.attachView(self)
@@ -62,8 +57,9 @@ class SharePointViewController: BaseViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = search
         
-        let cancelButtonAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font :
-            UIFont(name: "Roboto", size: 17.0) ?? UIFont.systemFont(ofSize: 17)]
+        let cancelButtonAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
+                                      NSAttributedString.Key.font : UIFont(name: "Roboto", size: 17.0) ?? UIFont.systemFont(ofSize: 17)
+        ]
         UIBarButtonItem.appearance().setTitleTextAttributes(cancelButtonAttributes , for: .normal)
         if !presenter.searchText.isEmpty {
             search.searchBar.text = presenter.searchText
@@ -128,9 +124,15 @@ class SharePointViewController: BaseViewController {
     }
     
     fileprivate func createRightBarButton() {
-        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didPressAddNewButton(_:)))
+        let addBarButton = UIBarButtonItem(barButtonSystemItem: .add,
+                                           target: self,
+                                           action: #selector(didPressAddNewButton(_:))
+        )
         addBarButton.tintColor = .white
-        let searchBarButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(didPressSearchButton(_:)))
+        let searchBarButton = UIBarButtonItem(barButtonSystemItem: .search,
+                                              target: self,
+                                              action: #selector(didPressSearchButton(_:))
+        )
         searchBarButton.tintColor = .white
         navigationItem.rightBarButtonItems = [addBarButton, searchBarButton]
     }
@@ -175,12 +177,14 @@ class SharePointViewController: BaseViewController {
 
 //MARK: - UIViewControllerPreviewingDelegate
 extension SharePointViewController: UIViewControllerPreviewingDelegate {
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           viewControllerForLocation location: CGPoint) -> UIViewController? {
         print(collectionView.point(inside: location, with: .none))
         return UIViewController()
     }
     
-    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing,
+                           commit viewControllerToCommit: UIViewController) {
         print("previewingContext")
     }
 }
@@ -198,7 +202,10 @@ extension SharePointViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderCollectionViewCell.identifier, for: indexPath) as? HeaderCollectionViewCell else { return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HeaderCollectionViewCell.identifier,
+                                                                for: indexPath) as? HeaderCollectionViewCell else {
+                                                                    return UICollectionViewCell()
+            }
             let title = presenter.columns[indexPath.row].displayName
             cell.titleLabel.text = String(describing: title ?? "No title").uppercased()
             if let selectedIndexPath = presenter.selectedIndexPath,
@@ -209,7 +216,10 @@ extension SharePointViewController: UICollectionViewDataSource {
             }
             return cell
         } else {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewCell.identifier, for: indexPath) as? ItemCollectionViewCell else { return UICollectionViewCell()}
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ItemCollectionViewCell.identifier,
+                                                                for: indexPath) as? ItemCollectionViewCell else {
+                                                                    return UICollectionViewCell()
+            }
             cell.setup(section: indexPath.section)
             cell.delegate = self
             let key = presenter.columns[indexPath.item].name ?? ""
@@ -251,22 +261,10 @@ extension SharePointViewController: UICollectionViewDelegate {
                 presenter.selectedIndexPath = nil
                 presenter.sortByDown(name:presenter.columns[indexPath.row].name ?? "")
             }
-//        } else if indexPath.row == 0 && indexPath.section != 0 {
         } else {
             collectionView.deselectItem(at: indexPath, animated: false)
             
             performSegue(withIdentifier: "editItemSegue", sender: indexPath.section - 1)
-
-//            if let section = presenter.editedSelectedSection,
-//                section != indexPath.section,
-//                let previousSelectedCell = collectionView.cellForItem(at: IndexPath(item: 0, section: section)) as? ItemCollectionViewCell {
-//                previousSelectedCell.editButton.isHidden = true
-//            }
-//
-//            guard let cell = collectionView.cellForItem(at: indexPath) as? ItemCollectionViewCell else { return }
-//
-//            cell.editButton.isHidden = false
-//            presenter.editedSelectedSection = indexPath.section
         }
     }
     
@@ -302,21 +300,6 @@ extension SharePointViewController: UISearchResultsUpdating, UISearchBarDelegate
         collectionView.reloadData()
     }
     
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        guard let text = searchBar.text else {
-//            presenter.searchText = ""
-//            collectionView.reloadData()
-//            return }
-//        presenter.searchText = text
-//
-//        if text.isEmpty {
-//            presenter.isFiltering = false
-//            collectionView.reloadData()
-//        } else {
-//            presenter.isFiltering = true
-//            presenter.filter()
-//        }
-//    }
 }
 
 //MARK: - SharePointView

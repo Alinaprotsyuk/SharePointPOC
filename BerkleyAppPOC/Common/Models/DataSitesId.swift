@@ -13,21 +13,21 @@ For support, please feel free to contact me at https://www.linkedin.com/in/syeda
 
 import Foundation
 
-struct DataSitesId : Codable {
-	let odataContext : String?
-	let odataEtag : String?
-	let createdDateTime : String?
-	let description : String?
-	let eTag : String?
-	let id : String?
-	let lastModifiedDateTime : String?
-	let name : String?
-	let webUrl : String?
-	let displayName : String?
-	let createdBy : CreatedBy?
-	let lastModifiedBy : LastModifiedBy?
-	let parentReference : ParentReference?
-	let list : List?
+struct DataSitesId: Codable {
+	let odataContext: String?
+	let odataEtag: String?
+	let createdDateTime: String?
+	let description: String?
+	let eTag: String?
+	let id: String?
+	let lastModifiedDateTime: String?
+	let name: String?
+	let webUrl: String?
+	let displayName: String?
+	let createdBy: CreatedBy?
+	let lastModifiedBy: LastModifiedBy?
+	let parentReference: ParentReference?
+	let list: List?
 
 	enum CodingKeys: String, CodingKey {
 		case odataContext = "@odata.context"

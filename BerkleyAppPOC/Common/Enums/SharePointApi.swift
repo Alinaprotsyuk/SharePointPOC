@@ -43,7 +43,6 @@ enum SharePointApi: SharePointProtocol {
             return ""
         case .allItems:
             return "?expand=columns,items(expand=fields)"
-            //"?expand=columns(select=readOnly,name,displayName,required),items(expand=fields)"
         case .createItem:
             return "/items"
         case .editItem(let id):
