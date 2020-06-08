@@ -1,0 +1,34 @@
+PODS:
+  - ADAL (4.0.0):
+    - ADAL/app-lib (= 4.0.0)
+  - ADAL/app-lib (4.0.0):
+    - ADAL/tokencacheheader
+  - ADAL/tokencacheheader (4.0.0)
+  - IQKeyboardManagerSwift (6.3.0)
+
+DEPENDENCIES:
+  - ADAL (from `https://github.com/AzureAD/azure-activedirectory-library-for-objc`)
+  - IQKeyboardManagerSwift
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - IQKeyboardManagerSwift
+
+EXTERNAL SOURCES:
+  ADAL:
+    :git: https://github.com/AzureAD/azure-activedirectory-library-for-objc
+    :submodules: true
+
+CHECKOUT OPTIONS:
+  ADAL:
+    :commit: b1ea2d4423d5d21579f7af12ceac81301debd84b
+    :git: https://github.com/AzureAD/azure-activedirectory-library-for-objc
+    :submodules: true
+
+SPEC CHECKSUMS:
+  ADAL: 2f09070fb5a7095172e34409459eca3f3f1d0d23
+  IQKeyboardManagerSwift: a8228c257614af98743b4cd8584637025f36358f
+
+PODFILE CHECKSUM: 2cb72632d56774128f3ed86d9815fef3037ad96c
+
+COCOAPODS: 1.6.1
